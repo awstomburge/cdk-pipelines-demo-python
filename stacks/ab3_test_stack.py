@@ -323,7 +323,7 @@ class Ab3TestStack(cdk.Stack):
             health_check_grace_period=60,
             health_check_type='EC2',
             launch_template=asg.CfnAutoScalingGroup.LaunchTemplateSpecificationProperty(
-                version='2',
+                version='1',
                 launch_template_id=self.ec2_launch_template.ref,
             ),
             target_group_arns=[

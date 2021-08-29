@@ -27,4 +27,4 @@ class PipelineStack(cdk.Stack):
 
         self.code_pipeline.add_stage(PipelineStackTestStage(self, "Test-Deploy"))
 
-        self.code_pipeline.add_stage(PipelineStackProdStage(self, "Prod-Deploy"))
+        # self.code_pipeline.add_stage(PipelineStackProdStage(self, "Prod-Deploy"))
