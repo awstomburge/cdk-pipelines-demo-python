@@ -25,6 +25,6 @@ class PipelineStack(cdk.Stack):
                     'main',
                     authentication=cdk.SecretValue.secrets_manager('awstomburge-github-token')
                 ),
-                commands=["npm ci", "npm run build", "npx cdk synth"]
+                commands=["npm install -g aws-cdk", "pip install -r requirements.txt", "cdk synth"]
             )
         )
