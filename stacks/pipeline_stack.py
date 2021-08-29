@@ -2,7 +2,7 @@ from aws_cdk import core as cdk
 from aws_cdk import aws_codepipeline as codepipeline
 import aws_cdk.pipelines as pipelines
 from stacks.pipeline_stack_test_stage import PipelineStackTestStage
-
+from stacks.pipeline_stack_prod_stage import PipelineStackProdStage
 
 class PipelineStack(cdk.Stack):
 
@@ -27,4 +27,4 @@ class PipelineStack(cdk.Stack):
 
         self.code_pipeline.add_stage(PipelineStackTestStage(self, "Test-Deploy"))
 
-
+        self.code_pipeline.add_stage(PipelineStackProdStage(self, "Prod-Deploy"))
