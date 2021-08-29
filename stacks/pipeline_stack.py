@@ -1,7 +1,7 @@
 from aws_cdk import core as cdk
 from aws_cdk import aws_codepipeline as codepipeline
-import aws_cdk.aws_secretsmanager as sm
 import aws_cdk.pipelines as pipelines
+from stacks.pipeline_stack_test_stage import PipelineStackTestStage
 
 
 class PipelineStack(cdk.Stack):
@@ -10,10 +10,6 @@ class PipelineStack(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
-
-        # secret = sm.Secret.from_secret_attributes(
-        #     secret_complete_arn='arn:aws:secretsmanager:us-east-1:766661562221:secret:awstomburge-github-token-6wKFys'
-        # )
 
         self.code_pipeline = pipelines.CodePipeline(self,
             id='CDK Pipeline',
@@ -28,3 +24,7 @@ class PipelineStack(cdk.Stack):
                 commands=["npm install -g aws-cdk", "pip install -r requirements.txt", "cdk synth"]
             )
         )
+
+        self.code_pipeline.add_stage(PipelineStackTestStage(self, "Test-Deploy"))
+
+
