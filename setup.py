@@ -9,17 +9,24 @@ setuptools.setup(
     name="cdk_pipelines_demo_python",
     version="0.0.1",
 
-    description="An empty CDK Python app",
+    description="CDK Pipelines Demo Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
 
     author="author",
 
-    package_dir={"": "cdk_pipelines_demo_python"},
-    packages=setuptools.find_packages(where="cdk_pipelines_demo_python"),
+    package_dir={"": "stacks"},
+    packages=setuptools.find_packages(where="stacks"),
 
     install_requires=[
-        "aws-cdk.core==1.119.0",
+        "aws-cdk.core==1.120.0",
+        "aws-cdk.pipelines==1.120.0",
+        "aws-cdk.aws-autoscaling==1.120.0",
+        "aws-cdk.aws-codestar==1.120.0",
+        "aws-cdk.aws-cloudwatch==1.120.0",
+        "aws-cdk.aws-ec2==1.120.0",
+        "aws-cdk.aws-elasticloadbalancingv2==1.120.0",
+        "aws-cdk.aws-rds==1.120.0",
     ],
 
     python_requires=">=3.6",
