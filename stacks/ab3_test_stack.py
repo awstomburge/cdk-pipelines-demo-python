@@ -308,39 +308,39 @@ class Ab3TestStack(cdk.Stack):
         )
 
         # EC2 Auto-Scaling Group
-        self.ec2_asg = asg.CfnAutoScalingGroup(self,
-            id='auto-scaling group',
-            max_size='20',
-            min_size='2',
-            auto_scaling_group_name='asg',
-            availability_zones=[
-                cdk.Fn.select(0, cdk.Fn.get_azs()),
+        # self.ec2_asg = asg.CfnAutoScalingGroup(self,
+        #     id='auto-scaling group',
+        #     max_size='20',
+        #     min_size='2',
+        #     auto_scaling_group_name='asg',
+        #     availability_zones=[
+        #         cdk.Fn.select(0, cdk.Fn.get_azs()),
                 
-            ],
-            capacity_rebalance=True,
-            cooldown='60',
-            desired_capacity='2',
-            health_check_grace_period=60,
-            health_check_type='EC2',
-            launch_template=asg.CfnAutoScalingGroup.LaunchTemplateSpecificationProperty(
-                version='1',
-                launch_template_id=self.ec2_launch_template.ref,
-            ),
-            target_group_arns=[
-                self.elb_target_group.ref
-            ],
-            vpc_zone_identifier=[
-                self.public_subnet1.ref,
+        #     ],
+        #     capacity_rebalance=True,
+        #     cooldown='60',
+        #     desired_capacity='2',
+        #     health_check_grace_period=60,
+        #     health_check_type='EC2',
+        #     launch_template=asg.CfnAutoScalingGroup.LaunchTemplateSpecificationProperty(
+        #         version='1',
+        #         launch_template_id=self.ec2_launch_template.ref,
+        #     ),
+        #     target_group_arns=[
+        #         self.elb_target_group.ref
+        #     ],
+        #     vpc_zone_identifier=[
+        #         self.public_subnet1.ref,
                 
-            ],
-            tags=[asg.CfnAutoScalingGroup.TagPropertyProperty(
-                key='1',
-                propagate_at_launch=False,
-                value='0'
-            )]
-        )
-        self.ec2_asg.add_depends_on(self.db_cluster)
-        self.ec2_asg.add_depends_on(self.db1)
+        #     ],
+        #     tags=[asg.CfnAutoScalingGroup.TagPropertyProperty(
+        #         key='1',
+        #         propagate_at_launch=False,
+        #         value='0'
+        #     )]
+        # )
+        # self.ec2_asg.add_depends_on(self.db_cluster)
+        # self.ec2_asg.add_depends_on(self.db1)
 
         # Cloudwatch Metric - CPU Utilization
         self.cwm_cpu = cw.CfnAlarm(self,
@@ -358,16 +358,16 @@ class Ab3TestStack(cdk.Stack):
         )
 
         # Scaling Policy
-        self.scaling_policy = asg.CfnScalingPolicy(self,
-            id='scaling-policy',
-            auto_scaling_group_name=self.ec2_asg.ref,
-            policy_type='TargetTrackingScaling',
-            estimated_instance_warmup=10,
-            target_tracking_configuration=asg.CfnScalingPolicy.TargetTrackingConfigurationProperty(
-                target_value=50,
-                predefined_metric_specification=asg.CfnScalingPolicy.PredefinedMetricSpecificationProperty(
-                    predefined_metric_type='ASGAverageCPUUtilization'
-                )
-            )
+        # self.scaling_policy = asg.CfnScalingPolicy(self,
+        #     id='scaling-policy',
+        #     auto_scaling_group_name=self.ec2_asg.ref,
+        #     policy_type='TargetTrackingScaling',
+        #     estimated_instance_warmup=10,
+        #     target_tracking_configuration=asg.CfnScalingPolicy.TargetTrackingConfigurationProperty(
+        #         target_value=50,
+        #         predefined_metric_specification=asg.CfnScalingPolicy.PredefinedMetricSpecificationProperty(
+        #             predefined_metric_type='ASGAverageCPUUtilization'
+        #         )
+        #     )
 
-        )
+        # )
